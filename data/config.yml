@@ -1,0 +1,155 @@
+---
+## デフォルト定義
+# サービス毎に指定されない場合に使用される設定値
+default:
+  # 取得対象開始時間(現在から何秒前か)
+  start_time: 300
+  # 取得対象終了時間(現在から何秒前か)
+  end_time: 0
+  # 統計情報の粒度(秒)
+  period: 60
+  # メトリクス名をキー、統計種別をバリューとするハッシュで定義
+  # statistics(統計種別)はSampleCount|Average|Sum|Minimum|Maximumの中から選択
+  metrics:
+    - name: CPUCreditBalance
+      statistics: Minimum
+
+## サービス[namespace]毎に取得するメトリクスを定義
+services:
+  - namespace: AWS/RDS
+    dimensions:
+      - DBInstanceIdentifier
+    metrics:
+      - name: CPUUtilization
+        statistics: Maximum
+      - name: DatabaseConnections
+        statistics: Average
+      - name: FreeStorageSpace
+        statistics: Minimum
+      - name: FreeableMemory
+        statistics: Minimum
+      - name: WriteIOPS
+        statistics: Average
+      - name: ReadIOPS
+        statistics: Average
+      - name: DiskQueueDepth
+        statistics: Average
+      - name: ReplicaLag
+        statistics: Maximum
+      - name: BinLogDiskUsage
+        statistics: Maximum
+      - name: WriteThroughput
+        statistics: Average
+      - name: ReadThroughput
+        statistics: Average
+      - name: SwapUsage
+        statistics: Maximum
+      - name: WriteLatency
+        statistics: Average
+      - name: ReadLatency
+        statistics: Average
+      - name: CPUCreditUsage
+        statistics: Maximum
+      - name: CPUCreditBalance
+        statistics: Minimum
+      - name: NetworkReceiveThroughput
+        statistics: Average
+      - name: NetworkTransmitThroughput
+        statistics: Average
+
+  - namespace: AWS/EC2
+    start_time: 600
+    end_time: 0
+    period: 300
+    dimensions:
+      - InstanceId
+    metrics:
+      - name: CPUCreditBalance
+        statistics: Minimum
+      - name: StatusCheckFailed
+        statistics: Maximum
+
+  - namespace: AWS/ElastiCache
+    dimensions:
+      - CacheClusterId
+      - CacheNodeId
+    metrics:
+      - name: CPUCreditUsage
+        statistics: Maximum
+      - name: CPUCreditBalance
+        statistics: Minimum
+      - name: CPUUtilization
+        statistics: Maximum
+      - name: FreeableMemory
+        statistics: Minimum
+      - name: NetworkBytesIn
+        statistics: Maximum
+      - name: NetworkBytesOut
+        statistics: Maximum
+      - name: SwapUsage
+        statistics: Maximum
+      - name: BytesUsedForCache
+        statistics: Maximum
+      - name: CacheHits
+        statistics: Maximum
+      - name: CacheMisses
+        statistics: Maximum
+      - name: CurrConnections
+        statistics: Maximum
+      - name: EngineCPUUtilization
+        statistics: Maximum
+      - name: Evictions
+        statistics: Maximum
+      - name: HyperLogLogBasedCmds
+        statistics: Maximum
+      - name: NewConnections
+        statistics: Maximum
+      - name: Reclaimed
+        statistics: Maximum
+      - name: ReplicationBytes
+        statistics: Maximum
+      - name: ReplicationLag
+        statistics: Maximum
+      - name: SaveInProgress
+        statistics: Maximum
+      - name: CurrItems
+        statistics: Maximum
+      - name: GetTypeCmds
+        statistics: Maximum
+      - name: HashBasedCmds
+        statistics: Maximum
+      - name: KeyBasedCmds
+        statistics: Maximum
+      - name: ListBasedCmds
+        statistics: Maximum
+      - name: SetBasedCmds
+        statistics: Maximum
+      - name: SetTypeCmds
+        statistics: Maximum
+      - name: SortedSetBasedCmds
+        statistics: Maximum
+      - name: StringBasedCmds
+        statistics: Maximum
+      - name: BytesUsedForHash
+        statistics: Maximum
+      - name: CmdFlush
+        statistics: Maximum
+      - name: CmdGet
+        statistics: Maximum
+      - name: CmdSet
+        statistics: Maximum
+      - name: CmdTouch
+        statistics: Maximum
+      - name: DeleteHits
+        statistics: Maximum
+      - name: DeleteMisses
+        statistics: Maximum
+      - name: GetHits
+        statistics: Maximum
+      - name: GetMisses
+        statistics: Maximum
+      - name: TouchHits
+        statistics: Maximum
+      - name: TouchMisses
+        statistics: Maximum
+

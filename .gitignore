@@ -1,0 +1,12 @@
+# output files
+/config.yml
+/bindata.go
+/cmc*
+/vendor
+
+# hidden files on MacOS
+.DS_Store
+
+# for JetBrains IDE
+/.idea
+
