@@ -28,9 +28,6 @@ const MaxMetricDataQuery = 100
 const MaxRateLimitListMetrics = 25
 const MaxRateLimitGetMetricData = 50
 
-// デフォルトの並列度（実行パラメータで変更可）
-const DefConcurrency = 10
-
 type SdkParam struct {
 	profile string
 	region  string
@@ -63,12 +60,11 @@ type Metric struct {
 }
 
 var (
-	argConcurrency = flag.Int("concurrency", DefConcurrency, "APIの並列数を指定する")
-	argProfile     = flag.String("profile", "", "AWS Shared Credential の Profile 名を指定する")
-	argRegion      = flag.String("region", "ap-northeast-1", "AWS Region 名を指定する")
-	argConfig      = flag.String("config", "config.yml", "取得メトリクスを指定した設定ファイルを指定する")
-	argOutput      = flag.Bool("output", false, "デフォルト設定情報(yaml)を標準出力する")
-	argLabelOnly   = flag.Bool("labelonly", false, "ラベル(1列目)のみ重複排除して出力する")
+	argProfile   = flag.String("profile", "", "AWS Shared Credential の Profile 名を指定する")
+	argRegion    = flag.String("region", "ap-northeast-1", "AWS Region 名を指定する")
+	argConfig    = flag.String("config", "config.yml", "取得メトリクスを指定した設定ファイルを指定する")
+	argOutput    = flag.Bool("output", false, "デフォルト設定情報(yaml)を標準出力する")
+	argLabelOnly = flag.Bool("labelonly", false, "ラベル(1列目)のみ重複排除して出力する")
 )
 var cwInstance *cloudwatch.CloudWatch
 var ec2Instance *ec2.EC2
